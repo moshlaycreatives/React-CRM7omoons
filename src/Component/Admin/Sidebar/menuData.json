@@ -1,0 +1,27 @@
+[
+    {
+        "id": 1,
+        "label": "Dashboard",
+        "path": "/admin/dashboard",
+        "icon": "DashboardOutlined"
+    },
+    {
+        "id": 2,
+        "label": "Staff",
+        "path": "/admin/staff",
+        "icon": "RequestQuote"
+    },
+    {
+        "id": 3,
+        "label": "Products",
+        "path": "/admin/products",
+        "icon": "PlagiarismOutlined"
+    },
+    {
+        "id": 4,
+        "label": "Charge Payment",
+        "path": "/admin/payment",
+        "icon": "PriceChange"
+    }
+    
+]

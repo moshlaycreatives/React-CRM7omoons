@@ -1,0 +1,33 @@
+[
+    {
+        "id": 1,
+        "label": "Dashboard",
+        "path": "/agent/dashboard",
+        "icon": "DashboardOutlined"
+    },
+    {
+        "id": 2,
+        "label": "Customer",
+        "path": "/agent/customer",
+        "icon": "Groups2"
+    },
+    {
+        "id": 3,
+        "label": "Invoices",
+        "path": "/agent/invoices",
+        "icon": "RequestQuote"
+    },
+    {
+        "id": 4,
+        "label": "Products",
+        "path": "/agent/products",
+        "icon": "PlagiarismOutlined"
+    },
+    {
+        "id": 5,
+        "label": "Charge Payment",
+        "path": "/agent/payment",
+        "icon": "PriceChange"
+    }
+    
+]
