@@ -138,7 +138,7 @@ const Graph = () => {
                                         color: "#FFFFFF",
                                         marginTop: "20px"
                                     }}>
-                                    {SaleData?.totalSale}
+                                   {`$ ${SaleData?.totalSale}`}
                                 </Typography>
                             </Typography>
                             <Box sx={{ display: 'flex', }}>

@@ -13,15 +13,28 @@
     },
     {
         "id": 3,
+        "label": "Invoices Status",
+        "path": "/admin/allInvoices",
+        "icon": "PriceChange"
+    },
+    {
+        "id": 4,
+        "label": "Order Status",
+        "path": "/admin/orderStatus",
+        "icon": "PriceChange"
+    },
+    {
+        "id": 5,
         "label": "Products",
         "path": "/admin/products",
         "icon": "PlagiarismOutlined"
     },
     {
-        "id": 4,
+        "id": 5,
         "label": "Charge Payment",
         "path": "/admin/payment",
         "icon": "PriceChange"
     }
+
     
 ]

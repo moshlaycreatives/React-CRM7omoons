@@ -36,6 +36,7 @@ export const endpoints = {
     ChangeInvoiceStatus:`${BASE_URL}/api/v1/invoice/change-invoice-status/`,
     ChangeCustomeStatus:`${BASE_URL}/api/v1/customer/change-status`,
     OrderStatusChange:`${BASE_URL}/api/v1/invoice/change-order-status/`,
+    AllInvoiceGetByAdmin:`${BASE_URL}/api/v1/invoice/get-all-invoices-by-admin`,
 
 };
 

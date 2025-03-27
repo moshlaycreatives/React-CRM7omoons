@@ -69,10 +69,11 @@ const Report = () => {
             // Set an empty array to prevent crashes
         }
     };
+
     const GetInvoiceMonth = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(`${endpoints.GetInvoicebymonth}?month=${formData.month}`, {
+            const response = await axios.get(`${endpoints.GetInvoicebymonth}?month=${formData.month}&userId=${_id}`, {
                 headers: { Authorization: `Token ${token}` }
             });
 

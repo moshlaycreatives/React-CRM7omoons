@@ -12,7 +12,6 @@ import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from "react-router-dom";
-import AddInvoices from "./AddInvoices";
 import axios from "axios";
 import { endpoints } from "../../../apiEndpoints";
 import MenuItem from '@mui/material/MenuItem';
@@ -28,108 +27,11 @@ import toast from "react-hot-toast";
 const url = "https://13.60.141.161:3000"
 
 
-const Data = [
-    {
-        id: "1",
-        Id: "12",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Pending",
-        Change: "Select Status",
-    },
-    {
-        id: "2",
-        Id: "13",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Paid",
-        Change: "Select Status",
-    },
-    {
-        id: "3",
-        Id: "14",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Pending",
-        Change: "Select Status",
-    },
-    {
-        id: "4",
-        Id: "15",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Cancle",
-        Change: "Select Status",
-    },
-    {
-        id: "5",
-        Id: "16",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Paid",
-        Change: "Select Status",
-    },
-    {
-        id: "6",
-        Id: "17",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Pending",
-        Change: "Select Status",
-    },
-    {
-        id: "6",
-        Id: "18",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Cancle",
-        Change: "Select Status",
-    },
-    {
-        id: "6",
-        Id: "19",
-        Company: "Moody moon",
-        client: "Shyamal Patel",
-        Products: "CBlue Raspberry, Vanilla Mint",
-        amount: "$2,345",
-        Invoice: "2004",
-        date: "12-03-2025",
-        status: "Pending",
-        Change: "Select Status",
-    },
-]
 
 
 
-const Invoices = () => {
+
+const OrderProcess = () => {
     const [formData, setformData] = useState({});
     const [open, setopen] = useState(false);
     const [InVoiceData, setInVoiceData] = useState(null)
@@ -170,23 +72,28 @@ const Invoices = () => {
 
 
 
+
+
+
     const getAllInvoice = async () => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.get(endpoints.GetAllInvoiceBYAgent, {
+            const response = await axios.get(endpoints.AllInvoiceGetByAdmin, {
                 headers: { Authorization: `Token ${token}` }
             });
-
+    
             toast.success(response.data.message);
-            setInVoiceData(Array.isArray(response.data.data) ? response.data.data : []);
+    
+            // Filter the invoices to show only those with 'Pending' status
+            const PaidInvoices = Array.isArray(response.data.data) ? response.data.data.filter(invoice => invoice.order?.orderStatus === 'InProcess') : [];
+    
+            setInVoiceData(PaidInvoices );
         } catch (error) {
-            toast.error(error.response.data.message);
+            toast.error(error.response ? error.response.data.message : "An error occurred");
             setInVoiceData([]); // Set an empty array to prevent crashes
         }
     };
-
-
-
+    
 
 
 
@@ -235,10 +142,7 @@ const Invoices = () => {
 
 
 
-    const add = () => {
-        navigate('/agent/invoices/Add-Invoices')
-    }
-
+   
 
 
     const VIewPDF = (pdfUrl) => {
@@ -254,44 +158,7 @@ const Invoices = () => {
 
     return (
         <>
-            <Box sx={{ display: 'flex', flexFlow: "row", justifyContent: 'space-between', width: '100%', }}>
-                <Typography
-
-                    style={{
-                        fontFamily: "Outfit",
-                        fontWeight: 500,
-                        fontSize: "25px",
-                        lineHeight: "31px",
-                        color: "#0F75BC"
-                    }}>
-                    {`${"Dashboard>"}`}
-                    <span style={{
-                        color: "#2B2B2B"
-                    }}>Invoice</span>
-
-                </Typography>
-                <Box sx={{ display: 'flex', }}>
-                    <Button style={{
-                        backgroundColor: "#0F75BC",
-                        fontFamily: "Outfit",
-                        fontSize: "14px",
-                        lineHeight: "16px",
-                        fontWeight: 500,
-                        textTransform: "none",
-                        width: "160px",
-                        height: "50px",
-                        margin: "0px 0px 50px 0px"
-
-                    }}
-                        variant="contained"
-                        startIcon={<AddIcon />}
-                        onClick={add}
-                    >Create Invoice</Button>
-                </Box>
-            </Box>
-
-
-
+           
             <Box sx={{
                 boxShadow: "0px 4px 30px 0px #0000001A",
                 borderRadius: "10px",
@@ -421,4 +288,4 @@ const Invoices = () => {
 }
 
 
-export default Invoices;
+export default OrderProcess;

@@ -79,7 +79,7 @@ const Nav = ({ menuData }) => {
           <img
             src="/image/Logo.png"
             style={{
-              width: "250px",
+              width: "150px",
               height: "100px",
 
 

@@ -12,7 +12,8 @@ import EditStaff from "../Pages/Staff/EditStaff";
 import Section from "../Pages/Staff/Section";
 import AddProducts from "../Pages/Products/AddProducts";
 import AddStaff from "../Pages/Staff/AddStaff";
-
+import AllInvoices from "../Pages/AllInvoices/AllInvoices";
+import OrderStatus from "../Pages/OrderStatusInvoice/OrderStatus";
 
 
 
@@ -47,6 +48,8 @@ const AdminPortal = () => {
                     <Route path="/staff/section" element={<Section />} />
                     <Route path="/products/add-Products" element={<AddProducts />} />
                     <Route path="/staff/add-Staff" element={<AddStaff />} />
+                    <Route path="/allInvoices" element={<AllInvoices />} />
+                    <Route path="/orderStatus" element={<OrderStatus />} />
 
                 </Routes>
             </Root>

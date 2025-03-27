@@ -1,28 +1,22 @@
 import React from "react";
 import { useState } from "react";
 import { Box, Typography, Button, Tabs, Tab } from "@mui/material";
-import Report from "./Report";
-import Customer from "./Customer";
-import Invoices from "./Invoices";
+import PendingInvoices from "./PendingInvoices";
+import PaidInvoice from "./PaidInvoice";
+import CanceInvoice from "./CanceInvoice";
 import { useLocation, useNavigate } from 'react-router-dom';
 
 
 
 
 const Section = () => {
-    const location = useLocation();
-    const { _id } = location.state || {};
 
     const [selectedTab, setSelectedTab] = useState(0);
 
 
-    // const handleChange = (event, newValue) => {
-    //     setSelectedTab(newValue);
-    // };
-
     const handleChange = (event, newValue) => {
         setSelectedTab(newValue);
-        navigate(location.pathname, { state: { _id } }); // Navigate with _id
+        // navigate(location.pathname, { state: { _id } }); 
     };
 
     const TabPanel = ({ children, value, index }) => (
@@ -54,16 +48,16 @@ const Section = () => {
                                     color: "#0F75BC",
                                     margin: "0px 0px 40px 0px"
                                 }}>
-                                {`${"Dashboard>"}`}
+                                {`${"Invoice Status >"}`}
                                 <span style={{
                                     color: "#2B2B2B"
-                                }}>Reports</span>
+                                }}>Pending Invoice</span>
                             </Typography>
                         </Box>
 
                     </>
                 </>}
-                {selectedTab === 1 &&
+                {selectedTab === 1 && 
                     <>
                         <Box sx={{ display: 'flex', flexFlow: "row", justifyContent: 'space-between', width: '100%', }}>
                             <Typography
@@ -76,10 +70,10 @@ const Section = () => {
                                     color: "#0F75BC",
                                     margin: "0px 0px 40px 0px"
                                 }}>
-                                {`${"Dashboard>"}`}
+                                {`${"Invoice Status >"}`}
                                 <span style={{
                                     color: "#2B2B2B"
-                                }}>Customers</span>
+                                }}>Paid Invoice</span>
                             </Typography>
                         </Box>
                     </>
@@ -98,10 +92,10 @@ const Section = () => {
                                     color: "#0F75BC",
                                     margin: "0px 0px 40px 0px"
                                 }}>
-                                {`${"Dashboard>"}`}
+                                {`${"Invoice Status >"}`}
                                 <span style={{
                                     color: "#2B2B2B"
-                                }}>Invoice</span>
+                                }}>Cancel Invoice</span>
                             </Typography>
                         </Box>
 
@@ -111,22 +105,23 @@ const Section = () => {
             </Box>
             <Box style={{ margin: "8px 0px 0px 0px", }}>
                 <Tabs value={selectedTab} onChange={handleChange} aria-label="navigation tabs" indicatorColor="transparent" // Remove underline
-                    sx={{ borderBottom: 'none', display: 'flex' ,}} >
-                    <Tab style={{ color: selectedTab === 0 ? '#0F75BC' : 'inherit', border: selectedTab === 0 ? '2px solid #0F75BC' : '1px solid #2B2B2B', borderRadius: selectedTab === 0 ? '39px' : '39px' }} label="Report" {...a11yProps(0)} />
-                    <Tab style={{ color: selectedTab === 1 ? '#0F75BC' : 'inherit', border: selectedTab === 1 ? '2px solid #0F75BC' : '1px solid #2B2B2B', borderRadius: selectedTab === 1 ? '39px' : '39px', }} label="Customers" {...a11yProps(1)} />
-                    <Tab style={{ color: selectedTab === 2 ? '#0F75BC' : 'inherit', border: selectedTab === 2 ? '2px solid #0F75BC' : '1px solid #2B2B2B', borderRadius: selectedTab === 2 ? '39px' : '39px' }} label="Invoice" {...a11yProps(2)} />
+                    sx={{ borderBottom: 'none', display: 'flex', }} >
+                    <Tab style={{ color: selectedTab === 0 ? '#0F75BC' : 'inherit', border: selectedTab === 0 ? '2px solid #0F75BC' : '1px solid #2B2B2B', borderRadius: selectedTab === 0 ? '39px' : '39px' }} label="Pending Invoice" {...a11yProps(0)} />
+                    <Tab style={{ color: selectedTab === 1 ? '#0F75BC' : 'inherit', border: selectedTab === 1 ? '2px solid #0F75BC' : '1px solid #2B2B2B', borderRadius: selectedTab === 1 ? '39px' : '39px', }} label="Paid Invoice" {...a11yProps(1)} />
+                    <Tab style={{ color: selectedTab === 2 ? '#0F75BC' : 'inherit', border: selectedTab === 2 ? '2px solid #0F75BC' : '1px solid #2B2B2B', borderRadius: selectedTab === 2 ? '39px' : '39px' }} label="Cancel Invoice" {...a11yProps(2)} />
                 </Tabs>
                 <TabPanel value={selectedTab} index={0}>
-                    <Report />
+                    <PendingInvoices />
                 </TabPanel>
                 <TabPanel value={selectedTab} index={1}>
-                    <Customer />
+                    <PaidInvoice />
 
                 </TabPanel>
                 <TabPanel value={selectedTab} index={2}>
-                    <Invoices />
+                    <CanceInvoice />
 
                 </TabPanel>
+
 
             </Box>
         </>

@@ -101,8 +101,8 @@ const Login = () => {
                         <img
                             src="/image/Logo.png"
                             style={{
-                                width: "400px",
-                                height: "100px",
+                                width: "200px",
+                                height: "105px",
                                 display: "flex",
 
                             }}

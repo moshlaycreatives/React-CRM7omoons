@@ -161,11 +161,23 @@ const Products = () => {
                                                 fontWeight: 500,
                                                 fontSize: "18px",
                                                 lineHeight: "31px",
-                                                color: "#55BB36",
+                                                color: "red",
                                             }}
                                         >
                                             {item.quantity}
+                                            <Typography
+                                            style={{
+                                                fontFamily: "Outfit",
+                                                fontWeight: 500,
+                                                fontSize: "18px",
+                                                lineHeight: "31px",
+                                                color: "green",
+                                            }}
+                                        >
+                                            {`-${item.sold}`}
                                         </Typography>
+                                        </Typography>
+                                      
                                     </Box>
 
                                     <Typography

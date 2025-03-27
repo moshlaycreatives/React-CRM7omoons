@@ -63,29 +63,56 @@ const AddCustomer = () => {
 
     console.log("this is formDaa", formData)
 
-    const CreateCustomers = async () => {
+    // const CreateCustomers = async () => {
 
 
-        try {
+    //     try {
 
-            const token = localStorage.getItem("token");
-            const response = await axios.post(endpoints.CreateCustomer, formData, {
-                headers: { Authorization: `Token ${token}` },
-            });
+    //         const token = localStorage.getItem("token");
+    //         const response = await axios.post(endpoints.CreateCustomer, formData, {
+    //             headers: { Authorization: `Token ${token}` },
+    //         });
 
 
-            if (response.status === 200) {
+    //         if (response.status === 200) {
 
                 
+    //         }
+    //         toast.success(response.data.message);
+    //         handleNavigate();
+    //     } catch (error) {
+    //         toast.error(error.response.data.message);
+    //     }
+    // };
+
+
+
+
+    const CreateCustomers = async () => {
+        try {
+            // Filter out any fields with empty values
+            const filteredData = Object.keys(formData).reduce((acc, key) => {
+                if (formData[key]) {  // Only add fields with non-empty values
+                    acc[key] = formData[key];
+                }
+                return acc;
+            }, {});
+    
+            const token = localStorage.getItem("token");
+            const response = await axios.post(endpoints.CreateCustomer, filteredData, {
+                headers: { Authorization: `Token ${token}` },
+            });
+    
+            if (response.status === 200) {
+                toast.success(response.data.message);
+                handleNavigate();
             }
-            toast.success(response.data.message);
             handleNavigate();
         } catch (error) {
             toast.error(error.response.data.message);
         }
     };
-
-
+    
 
     return (
         <>
@@ -345,7 +372,7 @@ const AddCustomer = () => {
                                     color: "#2B2B2B",
                                     margin: "0px 0px 15px 0px"
                                 }}>
-                                    Str/Apt/Bid*
+                                    Str/Apt/Bid
                                 </Typography>
                                 <TextField fullWidth
                                     placeholder="Enter street or apartment or building"
