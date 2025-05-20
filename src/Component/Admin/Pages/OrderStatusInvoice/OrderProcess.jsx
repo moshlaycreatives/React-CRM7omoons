@@ -23,8 +23,8 @@ import toast from "react-hot-toast";
 
 // const url = "https://x4tlhqkd-3000.inc1.devtunnels.ms"
 // const url = "http://13.60.141.161:3000"
-// const url = "https://crm.7omoons.com:3000"
-const url = "https://13.60.141.161:3000"
+const url = "https://crm.7omoons.com:3000"
+// const url = "https://13.60.141.161:3000"
 
 
 
@@ -264,7 +264,7 @@ const OrderProcess = () => {
                                         <Box sx={{ display: "flex", gap: "5px" }}>
                                             <VisibilityIcon
                                                 onClick={() => VIewPDF(row.pdfUrl)}
-                                                style={{ color: "#55BB36", border: "1px solid #2B2B2B", borderRadius: "20px", padding: "4px" }}
+                                                style={{ color: "#55BB36", border: "1px solid #2B2B2B", borderRadius: "20px", padding: "4px" , cursor:"pointer" }}
                                             />
                                         </Box>
                                     </TableCell>

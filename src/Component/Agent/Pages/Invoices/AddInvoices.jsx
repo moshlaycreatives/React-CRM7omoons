@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Box, Typography, Divider, TextField, Button, } from "@mui/material";
+import {
+    Box, Typography, Divider, TextField, Button, CircularProgress,
+    Backdrop,
+} from "@mui/material";
 import Grid from '@mui/material/Grid2';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -14,7 +17,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import dayjs from "dayjs";
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 
 
@@ -31,6 +34,9 @@ const AddInvoices = () => {
     const [selectedCompany, setSelectedCompany] = useState('')
     const [selectedClient, setSelectedClient] = useState('')
     const [productData, setproductData] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [loading, setLoading] = useState(false);
+
     const navigate = useNavigate();
 
     const [formData, setformData] = useState({
@@ -134,7 +140,7 @@ const AddInvoices = () => {
         updatedEntries[entryIndex] = {
             ...updatedEntries[entryIndex],
             selectedProduct: item,
-            unitPrice: item.price, 
+            unitPrice: item.price,
             totalPrice: ''
         };
         setProductEntries(updatedEntries);
@@ -166,7 +172,7 @@ const AddInvoices = () => {
     };
 
 
-   
+
     const handleQuantityChange = (e, entryIndex) => {
         const inputValue = e.target.value;
         const numericValue = inputValue.replace(/[^0-9.]/g, '');
@@ -258,13 +264,13 @@ const AddInvoices = () => {
     const handleChange = (newValue) => {
         console.log("Raw New Date Value:", newValue);
 
-     
+
         const dayjsDate = newValue ? dayjs(newValue) : null;
 
         if (dayjsDate && dayjsDate.isValid()) {
             setformData((prevData) => ({
                 ...prevData,
-                date: dayjsDate, 
+                date: dayjsDate,
             }));
         } else {
             console.error("Invalid date selected:", newValue);
@@ -276,13 +282,17 @@ const AddInvoices = () => {
     const invoiceData = {
         ...formData,
         date: formData.date,
-      
+
     };
     console.log('Invoice Data:', invoiceData);
 
 
     const Createinvoice = async () => {
+        if (isSubmitting) return;
+
+        setIsSubmitting(true);
         try {
+            setLoading(true);
             const orderProducts = productEntries
                 .filter(entry => entry.selectedProduct && entry.quantity)
                 .map(entry => {
@@ -338,7 +348,10 @@ const AddInvoices = () => {
         } catch (error) {
             console.error("Invoice creation error:", error);
             toast.error(error.response?.data?.message || "Failed to create invoice");
+        } finally {
+            setLoading(false);
         }
+        setIsSubmitting(false);
     };
 
     const [discountAmount, setDiscountAmount] = useState(0);
@@ -393,9 +406,9 @@ const AddInvoices = () => {
     };
 
     function getSecondHalf(name) {
-        const parts = name.split(' - '); 
-        const midPoint = Math.floor(parts.length / 2); 
-        return parts.slice(midPoint).join(' - '); 
+        const parts = name.split(' - ');
+        const midPoint = Math.floor(parts.length / 2);
+        return parts.slice(midPoint).join(' - ');
     }
 
 
@@ -420,6 +433,20 @@ const AddInvoices = () => {
                     }}>Create Invoice</span>
                 </Typography>
             </Box>
+
+
+            {loading && (
+                <Backdrop
+                    sx={{
+                        color: "#fff",
+                        zIndex: (theme) => theme.zIndex.drawer + 1,
+                    }}
+                    open={loading}
+                >
+                    <CircularProgress color="inherit" />
+                </Backdrop>
+            )}
+
 
 
             <Box sx={{
@@ -697,7 +724,7 @@ const AddInvoices = () => {
                                                 placeholder="Enter Qty"
                                                 value={entry.quantity}
                                                 onChange={(e) => handleQuantityChange(e, entryIndex)}
-                                                type="number"
+
                                             />
                                         </Grid>
                                         <Grid size={{ xs: 12, md: 4 }}>
@@ -765,17 +792,17 @@ const AddInvoices = () => {
                                     </Button>
                                     <Box sx={{ display: 'flex', }}>
                                         <Button
-                                           style={{
-                                            border: "1px solid rgba(154, 25, 21, 1)",
-                                            color: "rgba(154, 25, 21, 1)",
-                                            fontSize: "14px",
-                                            lineHeight: "16px",
-                                            fontWeight: 500,
-                                            textTransform: "none",
-                                            width: "130px",
-                                            height: "40px",
-                                            margin: "20px 0px 50px 15px"
-                                        }}
+                                            style={{
+                                                border: "1px solid rgba(154, 25, 21, 1)",
+                                                color: "rgba(154, 25, 21, 1)",
+                                                fontSize: "14px",
+                                                lineHeight: "16px",
+                                                fontWeight: 500,
+                                                textTransform: "none",
+                                                width: "130px",
+                                                height: "40px",
+                                                margin: "20px 0px 50px 15px"
+                                            }}
                                             onClick={() => handleRemoveProduct(entryIndex)}
                                         >
                                             Cancel

@@ -32,11 +32,11 @@ export const endpoints = {
     GetAdminReportData: `${BASE_URL}/api/v1/dashboard/sale-details`,
     GetAdminOrdernbyDate: `${BASE_URL}/api/v1/dashboard/invoices-by-dates`,
     GetInvoicebymonth: `${BASE_URL}/api/v1/dashboard/get-invoice-stats`,
-    CreatePayment:`${BASE_URL}/api/v1/payment/create-payment`,
-    ChangeInvoiceStatus:`${BASE_URL}/api/v1/invoice/change-invoice-status/`,
-    ChangeCustomeStatus:`${BASE_URL}/api/v1/customer/change-status`,
-    OrderStatusChange:`${BASE_URL}/api/v1/invoice/change-order-status/`,
-    AllInvoiceGetByAdmin:`${BASE_URL}/api/v1/invoice/get-all-invoices-by-admin`,
+    CreatePayment: `${BASE_URL}/api/v1/payment/`,
+    ChangeInvoiceStatus: `${BASE_URL}/api/v1/invoice/change-invoice-status/`,
+    ChangeCustomeStatus: `${BASE_URL}/api/v1/customer/change-status`,
+    OrderStatusChange: `${BASE_URL}/api/v1/invoice/change-order-status/`,
+    AllInvoiceGetByAdmin: `${BASE_URL}/api/v1/invoice/get-all-invoices-by-admin`,
 
 };
 

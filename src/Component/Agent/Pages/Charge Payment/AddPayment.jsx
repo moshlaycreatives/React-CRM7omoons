@@ -13,13 +13,11 @@ import { endpoints } from "../../../apiEndpoints";
 const AddPayment = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [formData, setformData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        amount:""
+        price: "",
+        cardNumber: "",
+        expiry: "",
+        cvc: ""
     })
-
 
 
 
@@ -52,64 +50,39 @@ const AddPayment = () => {
     // };
 
 
-    // const CreatePayment = async () => {
-    //     try {
-    //         const token = localStorage.getItem("token");
-    //         const response = await axios.post(endpoints.CreatePayment, formData, {
-    //             headers: { Authorization: `Token ${token}` },
-    //         });
-    
-    //         if (response.status === 200) {
-    //             // const paymentUrl = response.data.url; // API se milne wala URL
-    //             const paymentUrl = response.data.session.url;
-    //             localStorage.setItem("paymentUrl", paymentUrl); // URL ko localStorage mein save karein
-    
-    //             console.log("Payment URL saved:", paymentUrl);
-    
-    //             // URL ko turant call karein
-    //             await callStoredUrl(paymentUrl);
-    //         }
-    //     } catch (error) {
-    //         console.error("Error creating payment:", error);
-    //     }
-    // };
-    
+
 
     const CreatePayment = async () => {
         try {
             const token = localStorage.getItem("token");
-            const response = await axios.post(endpoints.CreatePayment, formData, {
+
+            const payload = {
+                price: formData.price,
+                cardDetails: {
+                    cardNumber: formData.cardNumber,
+                    expiry: formData.expiry,
+                    cvc: formData.cvc,
+                }
+            };
+
+            console.log("this is paylord data", payload)
+
+            const response = await axios.post(endpoints.CreatePayment, payload, {
                 headers: { Authorization: `Token ${token}` },
             });
-    
+
             if (response.status === 200) {
-                const paymentUrl = response.data.session?.url; // Extracting URL safely
-                if (paymentUrl) {
-                    localStorage.setItem("paymentUrl", paymentUrl); // Saving URL in localStorage
-                    console.log("Payment URL saved:", paymentUrl);
-    
-                    // Open the payment URL in a new tab
-                    window.open(paymentUrl, "_blank");
-                } else {
-                    console.error("Payment URL not found in response.");
-                }
+                // Handle success (e.g. show a success message or redirect)
+                console.log("Payment successful");
             }
         } catch (error) {
-            console.error("Error creating payment:", error);
+            // Handle error (e.g. show error message)
+            console.error("Payment error", error);
         }
     };
-    
 
-    // Yeh function stored URL ko call karega
-    const callStoredUrl = async (url) => {
-        try {
-            const response = await axios.get(url); // URL ko call karein
-            console.log("Response from stored URL:", response.data);
-        } catch (error) {
-            console.error("Error calling stored URL:", error);
-        }
-    };
-    
+
+
 
     const handleopenPopup = () => {
         setShowPopup(true);
@@ -159,7 +132,7 @@ const AddPayment = () => {
                             color: "#2B2B2B",
                             padding: "20px"
                         }}>
-                            Client Information
+                            Payment Information
                         </Typography>
                         <Box>
                             <Divider
@@ -182,12 +155,12 @@ const AddPayment = () => {
                                 color: "#2B2B2B",
                                 margin: "0px 0px 15px 0px"
                             }}>
-                                Client Name
+                                Price
                             </Typography>
                             <TextField fullWidth
-                                placeholder="Enter client name"
-                                name="name"
-                                value={formData.name}
+                                placeholder="Enter Price"
+                                name="price"
+                                value={formData.price}
                                 onChange={handleChange}
                             />
                             <Typography style={{
@@ -198,12 +171,12 @@ const AddPayment = () => {
                                 color: "#2B2B2B",
                                 margin: "15px 0px 15px 0px"
                             }}>
-                                Email
+                                Card number
                             </Typography>
                             <TextField fullWidth
-                                placeholder="Enter email"
-                                name="email"
-                                value={formData.email}
+                                placeholder="Enter Card number"
+                                name="cardNumber"
+                                value={formData.cardNumber}
                                 onChange={handleChange}
                             />
                             <Typography style={{
@@ -214,12 +187,12 @@ const AddPayment = () => {
                                 color: "#2B2B2B",
                                 margin: "15px 0px 15px 0px"
                             }}>
-                                Phone
+                                Expiry date
                             </Typography>
                             <TextField fullWidth
-                                placeholder="Enter phone"
-                                name="phone"
-                                value={formData.phone}
+                                placeholder="Enter Expiry Data"
+                                name="expiry"
+                                value={formData.expiry}
                                 onChange={handleChange}
                             />
                             <Typography style={{
@@ -230,15 +203,15 @@ const AddPayment = () => {
                                 color: "#2B2B2B",
                                 margin: "15px 0px 15px 0px"
                             }}>
-                                Company
+                                Cvc
                             </Typography>
                             <TextField fullWidth
-                                placeholder="Enter Company name"
-                                name="company"
-                                value={formData.company}
+                                placeholder="Enter CVc"
+                                name="cvc"
+                                value={formData.cvc}
                                 onChange={handleChange}
                             />
-                            <Typography style={{
+                            {/* <Typography style={{
                                 fontFamily: "Outfit",
                                 fontWeight: 500,
                                 fontSize: "18px",
@@ -253,7 +226,7 @@ const AddPayment = () => {
                                 name="amount"
                                 value={formData.amount}
                                 onChange={handleChange}
-                            />
+                            /> */}
                         </Box>
 
                         <Button

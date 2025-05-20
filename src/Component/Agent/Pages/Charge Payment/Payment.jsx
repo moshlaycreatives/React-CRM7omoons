@@ -154,7 +154,7 @@ const Payment = () => {
                                 <TableCell style={{ fontFamily: "Outfit", fontWeight: 600, fontSize: "14px", lineHeight: "21px" }}>Action</TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody>
+                        {/* <TableBody>
                             {Data?.map((row) => (
                                 <TableRow key={row.id}>
                                     <TableCell>{row.id}</TableCell>
@@ -169,7 +169,7 @@ const Payment = () => {
                                     /></TableCell>
                                 </TableRow>
                             ))}
-                        </TableBody>
+                        </TableBody> */}
                     </Table>
 
                 </Box>

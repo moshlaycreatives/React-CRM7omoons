@@ -347,11 +347,11 @@ const Customer = () => {
                                         <TableCell>
                                             <Box sx={{ display: "flex", gap: "5px" }}>
                                                 <VisibilityIcon
-                                                    style={{ color: "#55BB36", border: "1px solid #2B2B2B", borderRadius: "20px", padding: "4px" }}
+                                                    style={{ color: "#55BB36", border: "1px solid #2B2B2B", borderRadius: "20px", padding: "4px" , cursor:"pointer" }}
                                                     onClick={() => handleView(row)}
                                                 />
                                                 <CreateOutlinedIcon
-                                                    style={{ color: "#0F75BC", border: "1px solid #2B2B2B", borderRadius: "20px", padding: "4px" }}
+                                                    style={{ color: "#0F75BC", border: "1px solid #2B2B2B", borderRadius: "20px", padding: "4px" , cursor:"pointer"}}
                                                     onClick={() => handleEdit(row)}
                                                 />
                                             </Box>
